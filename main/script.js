@@ -1,26 +1,75 @@
-import { auth } from "../shared/firebase-config.js";
-import { signOut as firebaseSignOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
-// Check if a user is logged in
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    console.log('User is logged in:', user);
-    // Show main project content
-    renderTodo();
-  } else {
-    console.log('No user is logged in');
-    // Redirect to login page
-    window.location.href = "../user-auth/index.html";
-  }
-});
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAzTcM8rxebc2vAWoUYjPXvdMj5-YOvOPQ",
+  authDomain: "login-with-firebase-3006c.firebaseapp.com",
+  projectId: "login-with-firebase-3006c",
+  storageBucket: "login-with-firebase-3006c.appspot.com",
+  messagingSenderId: "941779347091",
+  appId: "1:941779347091:web:e643074f0cc0cd4ad00f66",
+  measurementId: "G-RGKYT8DL4K",
+  databaseURL: "https://login-with-firebase-3006c-default-rtdb.asia-southeast1.firebasedatabase.app"
+};
 
-let todos = JSON.parse(localStorage.getItem('todos'));
-if (!todos) {
-  todos = [];
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const database = getDatabase(app);
+
+let todos = [];
+
+// Function to load todos for the authenticated user
+function loadTodos() {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log("User is logged in:", user);
+      const userId = user.uid;
+      const todosRef = ref(database, 'todos/' + userId);
+
+      get(todosRef)
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            todos = snapshot.val();
+            renderTodo();
+          } else {
+            console.log("No todos found for this user.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error loading todos:", error);
+        });
+    } else {
+      console.log("No user is logged in.");
+    }
+  });
 }
 
+// Function to save todos for the authenticated user
 function saveTodos() {
-  localStorage.setItem('todos', JSON.stringify(todos));
+  const user = auth.currentUser;
+  if (user) {
+    const userId = user.uid;
+    const todosRef = ref(database, 'todos/' + userId);
+    set(todosRef, todos)
+      .then(() => {
+        console.log("Todos saved successfully.");
+      })
+      .catch((error) => {
+        console.error("Error saving todos:", error);
+      });
+  }
+}
+
+// Function to sign out the user
+function signOutUser() {
+  signOut(auth).then(() => {
+    window.location.href = "../user-auth/index.html";
+  }).catch((error) => {
+    console.error("Error signing out:", error);
+  });
 }
 
 function addTodo() {
@@ -36,8 +85,8 @@ function renderTodo() {
   todos.forEach((todo, index) => {
     render_todos += `
       <div>
-        <input type="checkbox" class="todo-checkbox js-checkbox-${index}" onclick="toggleCheckbox(${index})" >
-        <span class="js-todoText-${index}"> ${todo} </span>
+        <input type="checkbox" class="todo-checkbox js-checkbox-${index}" onclick="toggleCheckbox(${index})">
+        <span class="js-todoText-${index}">${todo}</span>
         <button onclick="deleteTodo(${index})">Delete</button>
       </div>`;
   });
@@ -66,18 +115,12 @@ function deleteAllTodos() {
   renderTodo();
 }
 
-function signOut() {
-  firebaseSignOut(auth).then(() => {
-    console.log('User signed out');
-    window.location.href = "../user-auth/index.html";
-  }).catch((error) => {
-    console.error('Error signing out:', error);
-  });
-}
-
-window.addEventListener('load', renderTodo);
+// Attach functions to window object
 window.addTodo = addTodo;
 window.deleteTodo = deleteTodo;
 window.deleteAllTodos = deleteAllTodos;
 window.toggleCheckbox = toggleCheckbox;
-window.signOut = signOut;
+window.signOutUser = signOutUser;
+
+// Load todos on page load
+window.addEventListener('load', loadTodos);
