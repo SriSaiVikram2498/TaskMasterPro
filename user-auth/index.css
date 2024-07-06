@@ -1,0 +1,72 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    /* background: -webkit-linear-gradient(25deg, #FFBE0B, #FB5607, #FF006E, #8338EC, #3A86FF); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+.container{
+    background: -webkit-linear-gradient(25deg, rgba(255, 190, 11, 0.2), rgba(251, 86, 7, 0.2), rgba(255, 0, 110, 0.2), rgba(131, 56, 236, 0.2), rgba(58, 134, 255, 0.2));
+    height: 600px;
+    width: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Arrange children in a column */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Ensure child elements do not overflow */
+}
+.login{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    /* background: -webkit-linear-gradient(25deg, rgba(255, 190, 11, 0.2), rgba(251, 86, 7, 0.2), rgba(255, 0, 110, 0.2), rgba(131, 56, 236, 0.2), rgba(58, 134, 255, 0.2)); */
+    padding: 20px;
+    border-radius: 8px;
+}
+.login h2 {
+    margin-bottom: 20px;
+    background: -webkit-linear-gradient(25deg, #FFBE0B, #FB5607, #FF006E, #8338EC, #3A86FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 24px;
+}
+.login input {
+    margin-bottom: 20px;
+    padding: 8px 16px;
+    width: 265px;
+    font-size: 16px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-clip: padding-box;
+    transition: border-color 0.3s;
+}
+.login input:focus {
+    border-image: linear-gradient(25deg, #FFBE0B, #FB5607, #FF006E, #8338EC, #3A86FF) 1;
+    outline: none;
+}
+.login div {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Add a gap between the buttons */
+    width: auto; /* Adjust width as needed */
+    margin-top: 20px; /* Add margin-top to move the buttons down */
+}
+.login button{
+    padding: 10px 6px;
+    width:80px;
+    border: none;
+    background: -webkit-linear-gradient(25deg, #FFBE0B, #FB5607, #FF006E, #8338EC, #3A86FF);
+    color:white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.login button :hover{
+    filter: brightness(1.2); /* Brighten the button on hover */
+}

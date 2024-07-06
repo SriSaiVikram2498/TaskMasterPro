@@ -1,0 +1,37 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Todo-List App</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Todo-List App</h1>
+                <button onclick="signOut()" class="signout-button">Sign Out</button>
+            </div>
+            <div class="box">
+                <input class="input-box" type="text" placeholder="Enter a task">
+                <button onclick="addTodo()" class="add-button">Add</button>
+            </div> 
+            <div class="render-todo">
+
+            </div>
+            <button onclick="deleteAllTodos()" class="delete-all-button">Delete All</button>
+        </div>
+        <script type="module">
+            import { auth } from "../shared/firebase-config.js";
+    
+            auth.onAuthStateChanged((user) => {
+                if (!user) {
+                    window.location.href = "../user-auth/index.html";
+                } else {
+                    console.log('User is logged in:', user);
+                }
+            });
+        </script>
+        <script type="module" src="script.js"></script>
+    </body>
+    </html>
