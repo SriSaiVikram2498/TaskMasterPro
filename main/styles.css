@@ -1,127 +1,187 @@
+/* General styles for body and html */
 body, html {
     height: 100%;
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif;
 }
+
+/* Container styles */
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    background-color: aliceblue;
-    width: 600px;
-    height: 600px;
+    background-color: #ffffff;
+    width: 400px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
+
+/* Header styles */
 .header {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
+
+/* Title styles */
+h1 {
+    margin: 0;
+    color: #343a40;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Sign-out button styles */
+.signout-button {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: #ff6b6b;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.signout-button i {
+    margin-right: 5px;
+}
+
+.signout-button:hover {
+    background-color: #ff4757;
+}
+
+/* Input box and add button container styles */
 .box {
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+    margin-bottom: 20px;
 }
+
+/* Input box styles */
 .input-box {
-    flex: 1;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #ced4da;
+    width: 100%;
     border-radius: 4px;
-    margin-right: 10px;
+    margin-bottom: 10px;
 }
-h1 {
-    margin: 0;
-    color: #333;
-    flex-grow: 1; /* Ensure the heading takes up remaining space */
-    padding-left: 130px;
-}
-.signout-button {
-    padding: 10px 20px;
+
+/* Due date input styles */
+.due-date-input {
+    padding: 10px;
     font-size: 16px;
-    color: white;
-    background-color: #007bff;
-    border: none;
+    border: 1px solid #ced4da;
     border-radius: 4px;
-    cursor: pointer;
-    white-space: nowrap; /* Prevent text from breaking into two lines */
+    width: 100%;
+    margin-bottom: 10px;
 }
+
+/* Add button styles */
 .add-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #007bff;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: #1e90ff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.add-button i {
+    margin-right: 5px;
 }
 
 .add-button:hover {
-    background-color: #0056b3;
+    background-color: #1c7ed6;
 }
+
+/* Render todos container styles */
 .render-todo {
     width: 100%;
     margin-bottom: 20px;
-    margin-top: 20px;
-    max-height: 400px; /* Adjust max height as needed */
-    overflow-y: auto; /* Enable vertical scrollbar if todos overflow */
+    max-height: 300px;
+    overflow-y: auto;
 }
 
+/* Individual todo item styles */
 .render-todo div {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #ced4da;
     border-radius: 4px;
     margin-bottom: 10px;
-    background-color: #fff;
-    word-wrap: break-word; /* Allow long words to break */
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.render-todo div .todo-checkbox {
-    transform: scale(1.5); /* Adjust the scale value as needed */
-    margin-right: 30px;
-    
+/* Checkbox styles */
+.todo-checkbox {
+    transform: scale(1.2);
+    margin-right: 20px;
 }
 
+/* Todo text styles */
+.todo-text {
+    flex-grow: 1;
+    font-size: 16px;
+    color: #343a40;
+}
+
+/* Delete button styles */
 .render-todo div button {
     padding: 5px 10px;
     font-size: 14px;
-    color: white;
-    background-color: #dc3545;
+    color: #ffffff;
+    background-color: #ff6b6b;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-left: auto;
 }
 
 .render-todo div button:hover {
-    background-color: #c82333;
+    background-color: #ff4757;
 }
 
+/* Delete all button styles */
 .delete-all-button {
-    width: 100px;
-    background-color: #dc3545;
-    border: none;
-    padding: 10px 6px 10px 6px ;
+    width: 100%;
+    padding: 10px;
     font-size: 14px;
-    color: white;
+    color: #ffffff;
+    background-color: #ff6b6b;
+    border: none;
     border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-all-button i {
+    margin-right: 5px;
 }
 
 .delete-all-button:hover {
-    background-color: #c82333;
+    background-color: #ff4757;
 }
+
+/* Strikethrough text styles */
 .strikethrough {
     text-decoration: line-through;
     color: gray;
